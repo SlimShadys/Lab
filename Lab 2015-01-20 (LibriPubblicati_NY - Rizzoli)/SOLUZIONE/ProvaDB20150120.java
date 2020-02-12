@@ -29,10 +29,12 @@ public class ProvaDB20150120 {
 		String titolo_libro;
 		String nome_editore;
 		String codice_editore;
+		String citta_editore;
 		
 		String cognome_autore;
 		String nome_autore;
 
+		int num_autori;
 		int num_libri;
 		double prezzo_libro;		
 
@@ -56,6 +58,7 @@ public class ProvaDB20150120 {
 				        + "WHERE Titolo_libro IN (SELECT(Titolo_libro) FROM LibriPubblicati_NY) "
 				        + "ORDER BY Cognome_autore,Nome_autore ";
 
+		// es. 6: creazione stringa contenente comando SQL
 		String stringa6 = "SELECT Codice_libro,Titolo_libro,Count(Nro_autore) AS Nro_autori,Codice_editore,Nome_editore,Citta_editore "
                 + "FROM Autori NATURAL JOIN LibriAutori NATURAL JOIN Libri NATURAL JOIN Editori "
                 + "GROUP BY Codice_libro "
@@ -111,6 +114,8 @@ public class ProvaDB20150120 {
 
 			}
 			
+			System.out.println("\n\\-----------------------------//");
+			
 			// es. 5: esecuzione comando SQL
 			Statement istruzione5 = connessione.createStatement();
 			ResultSet risultato5 = istruzione5.executeQuery(stringa5);
@@ -125,6 +130,8 @@ public class ProvaDB20150120 {
 
 			}
 			
+			System.out.println("\n\\-----------------------------//");
+			
 			// es. 6: esecuzione comando SQL
 			Statement istruzione6 = connessione.createStatement();
 			ResultSet risultato6 = istruzione6.executeQuery(stringa6);
@@ -133,16 +140,25 @@ public class ProvaDB20150120 {
 			while (risultato6.next()) {
 				
 				titolo_libro = risultato6.getString("Titolo_libro");
+				num_autori = risultato6.getInt("Nro_autori");
+				nome_editore = risultato6.getString("Nome_editore");
+				citta_editore = risultato6.getString("Citta_editore");
 				
-				System.out.println("Titolo libro: " + titolo_libro);
+				System.out.println("Titolo libro : " + titolo_libro);
+				System.out.println("Numero autori: " + num_autori);
+				System.out.println("Nome editore : " + nome_editore);
+				System.out.println("Città editore: " + citta_editore);
 
 			}
+			
+			System.out.println("\n\\-----------------------------//");
 			
 			// es. 7: esecuzione comando SQL
 			Statement istruzione7 = connessione.createStatement();
 			ResultSet risultato7 = istruzione7.executeQuery(stringa7);
 			
 			System.out.println("\n7) Il numero ed il prezzo medio dei libri pubblicati da ciascun editore:");
+			
 			while (risultato7.next()) {
 				
 				nome_editore = risultato7.getString("Nome_editore");

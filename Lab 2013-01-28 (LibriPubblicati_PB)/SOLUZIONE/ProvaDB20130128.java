@@ -36,7 +36,7 @@ public class ProvaDB20130128 {
 		String stringa1 = "ALTER TABLE LibriAutori ADD FOREIGN KEY (Nro_Autore) REFERENCES Autori(Nro_autore)";
 
 		// es. 2: creazione stringa contenente comando SQL
-		String stringa2 = "INSERT INTO Autori(Nro_autore, Cognome_autore, Nome_autore) VALUES ('24', '', 'Liala') ";
+		String stringa2 = "INSERT INTO Autori(Nro_autore, Cognome_autore, Nome_autore) VALUES ('24', '', 'Liala')";
 
 		// es. 3: creazione stringa contenente comando SQL
 		String stringa3 = "CREATE VIEW LibriPubblicati_PB(Codice_libro, Titolo_libro, Tipo_libro) AS "
@@ -74,7 +74,7 @@ public class ProvaDB20130128 {
 			Statement istruzione1 = connessione.createStatement();
 			ok = istruzione1.executeUpdate(stringa1);
 
-			System.out.println();
+			System.out.println("Es1: Aggiunto vincolo referenziale fra l'attributo Codice_libro della relazione LibriAutori e la relazione Libri");
 
 			// es. 2: esecuzione comando SQL
 			Statement istruzione2 = connessione.createStatement();
@@ -86,7 +86,7 @@ public class ProvaDB20130128 {
 			Statement istruzione3 = connessione.createStatement();
 			istruzione3.execute(stringa3);
 
-			System.out.println();
+			System.out.println("\nEs3: Creata vista LibriPubblicati_PB.");
 
 			// es. 4: esecuzione comando SQL
 			Statement istruzione4 = connessione.createStatement();
