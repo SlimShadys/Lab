@@ -1,4 +1,3 @@
-package application;
 /*
 
 Prova di Laboratorio di PROGETTAZIONE DI BASI DI DATI
@@ -8,8 +7,8 @@ Docente: dott.ssa Francesca A. Lisi
 11 Febbraio 2013
 
 -------------------------------------
-Cognome e Nome	: CASAMASSIMA MICHELE
-Matricola	: 621831
+Cognome e Nome	: Scarano Gianmarco
+Matricola	: 705627
 -------------------------------------
 
  */
@@ -19,9 +18,13 @@ import java.sql.*;
 public class ProvaDB20130211 {
 
 	public static void main(String[] args) {
+		
 		// sezione dichiarazione variabili locali
 		String titolo;
 		String nome;
+		String codice_libro;
+		String tipo;
+		String codice_editore;
 		int numero;
 
 		Connection connessione = null;
@@ -42,7 +45,7 @@ public class ProvaDB20130211 {
 		String stringa3 = "CREATE VIEW LibriInVendita_HB(Titolo_libro) AS "
 				        + "SELECT Titolo_libro "
 			          	+ "FROM Libri NATURAL JOIN Scorte NATURAL JOIN Filiali "
-				        + "WHERE Nome_Filiale = \"Henrys Brentwood\"";
+				        + "WHERE Nome_Filiale = 'Henrys Brentwood'";
 
 		// es. 4: creazione stringa contenente comando SQL
 		String stringa4 = "SELECT * FROM LibriInVendita_HB";
@@ -72,7 +75,7 @@ public class ProvaDB20130211 {
 			 * creazione di una connessione al database HenrysBooksDB20130222
 			 * con credenziali di accesso appropriate
 			 */
-			connessione = DriverManager.getConnection("jdbc:mysql://localhost/henrysbooksdb20130211","root","");
+			connessione = DriverManager.getConnection("jdbc:mysql://localhost/henrysbooksdb20130211","root","password");
 
 			// es. 1: esecuzione comando SQL
 			Statement istruzione1 = connessione.createStatement();
@@ -99,47 +102,75 @@ public class ProvaDB20130211 {
 			ResultSet risultato4 = istruzione4.executeQuery(stringa4);
 
 			System.out
-					.println("\nIl contenuto della vista LibriInVendita_HB è:");
+					.println("\n4)Il contenuto della vista LibriInVendita_HB è:");
 			while (risultato4.next()) {
+				
 				titolo = risultato4.getString("Titolo_libro");
-				System.out.println("Titolo: " + titolo);
+				
+				System.out.println("Titolo libro: " + titolo);
+				System.out.println("-------------");
 
 			}
 
 			// es. 5: esecuzione comando SQL
 			Statement istruzione5 = connessione.createStatement();
 			ResultSet risultato5 = istruzione5.executeQuery(stringa5);
+			
+			System.out.println("\n\\-----------------------------//");
 
-			System.out.println("\nIl titolo dei libri per filiale e il numero copie è: ");
+			System.out.println("\n5)Il titolo dei libri per filiale e il numero copie è: ");
 			while (risultato5.next()) {
-				titolo = risultato5.getString("Titolo_libro");
+				
 				nome = risultato5.getString("Nome_filiale");
+				titolo = risultato5.getString("Titolo_libro");
 				numero = risultato5.getInt("Nro_copie_disponibili");
-				System.out.println("Filiale: " + nome + "\tTitolo: " + titolo + "\tCopie: " + numero);
+				
+				System.out.println("Nome filiale     : " + nome);
+				System.out.println("Titolo libro     : " + titolo);
+				System.out.println("Copie disponibili: " + numero);
+				System.out.println("-------------");
 
 			}
 
 			// es. 6: esecuzione comando SQL
 			Statement istruzione6 = connessione.createStatement();
 			ResultSet risultato6 = istruzione6.executeQuery(stringa6);
+			
+			System.out.println("\n\\-----------------------------//");
 
-			System.out.println("\nIl titolo del libro più economico è: ");
+			System.out.println("\n6)Il titolo del libro più economico è: ");
 			while (risultato6.next()) {
+				
 				titolo = risultato6.getString("Titolo_libro");
-				System.out.println("Titolo: " + titolo);
+				
+				System.out.println("Titolo libro: " + titolo);
 
 			}
 
 			// es. 7: esecuzione comando SQL
 			Statement istruzione7 = connessione.createStatement();
 			ResultSet risultato7 = istruzione7.executeQuery(stringa7);
+			
+			System.out.println("\n\\-----------------------------//");
 
-			System.out.println("\nI titoli dei libri, i nomi degli editori e il prezzo dei libri non presenti sulla vista LibriInVendita_HB sono: ");
+			System.out.println("\n7)I titoli dei libri, i nomi degli editori e il prezzo dei libri non presenti sulla vista LibriInVendita_HB sono: ");
 			while (risultato7.next()) {
+				
+				codice_libro = risultato7.getString("Codice_libro");
 				titolo = risultato7.getString("Titolo_libro");
-				nome = risultato7.getString("Nome_editore");
+				tipo = risultato7.getString("Tipo_libro");
 				double prezzo = risultato7.getDouble("Prezzo_libro");
-				System.out.println("Titolo: " + titolo + "\tNome editore: " + nome +  "\tPrezzo: " +prezzo );
+				codice_editore = risultato7.getString("Codice_editore");
+				nome = risultato7.getString("Nome_editore");
+
+				
+				System.out.println("Codice libro  : " + codice_libro);
+				System.out.println("Titolo libro  : " + titolo);
+				System.out.println("Tipo libro    : " + tipo);
+				System.out.println("Prezzo libro  : " + prezzo);
+				System.out.println("Codice editore: " + codice_editore);
+				System.out.println("Nome editore  : " + nome);
+				System.out.println("-------------");
 
 			}
 		} catch (SQLException e) {
