@@ -51,7 +51,7 @@ public class ProvaDB20150226 {
 
 		// es. 5: creazione stringa contenente comando SQL
 		String stringa5 = "SELECT DISTINCT Nro_autore, Cognome_autore, Nome_autore "
-				+ "FROM Autori NATURAL JOIN LibriAutori NATURAL JOIN LibriPubblicati_MA "
+				+ "FROM Autori NATURAL JOIN LibriAutori NATURAL JOIN Libri NATURAL JOIN LibriPubblicati_MA "
 				+ "ORDER BY Cognome_autore, Nome_autore";
 
 		// es. 6: creazione stringa contenente comando SQL		
@@ -61,7 +61,7 @@ public class ProvaDB20150226 {
 
 		// es. 7: creazione stringa contenente comando SQL
 		String stringa7 = "SELECT Nome_editore, count(*) AS Num_libri, avg(Prezzo_libro) AS Prezzo_medio "
-				+ "FROM Libri NATURAL JOIN Editori GROUP BY Codice_editore";
+				+ "FROM Editori NATURAL JOIN Libri GROUP BY Codice_editore";
 
 		try {
 

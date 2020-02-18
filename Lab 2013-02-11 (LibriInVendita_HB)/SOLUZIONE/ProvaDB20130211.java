@@ -66,7 +66,8 @@ public class ProvaDB20130211 {
 			           	+ "FROM Libri NATURAL JOIN Editori "
 			         	+ "WHERE titolo_libro NOT IN "
 			           	+ "(SELECT titolo_libro "
-			          	+ "FROM LibriInVendita_HB)";
+			          	+ "FROM LibriInVendita_HB) ";
+			          	+ "ORDER BY Titolo_libro";
 
 		try {
 			// caricamento del driver

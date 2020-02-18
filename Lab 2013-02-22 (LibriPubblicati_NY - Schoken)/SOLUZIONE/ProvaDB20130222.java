@@ -56,19 +56,19 @@ public class ProvaDB20130222 {
 
 		// es. 5: creazione stringa contenente comando SQL
 		String stringa5 = "SELECT Nro_autore, Nome_autore, Cognome_autore "
-				+ "FROM Autori NATURAL JOIN LibriPubblicati_NY NATURAL JOIN Libri NATURAL JOIN LibriAutori "
+				+ "FROM Autori NATURAL JOIN LibriAutori NATURAL JOIN Libri NATURAL JOIN LibriPubblicati_NY "
 				+ "GROUP BY Nro_autore "
 				+ "ORDER BY Cognome_autore, Nome_autore";
 
 		// es. 6: creazione stringa contenente comando SQL
 		String stringa6 = "SELECT Titolo_libro, COUNT(Nro_autore) AS NroAutori, Nome_editore, Citta_editore "
-				+ "FROM LibriAutori NATURAL JOIN Libri NATURAL JOIN Editori NATURAL JOIN Autori "
+				+ "FROM LibriAutori NATURAL JOIN Libri NATURAL JOIN Editori "
 				+ "GROUP BY Titolo_libro "
 				+ "ORDER BY Titolo_libro";
 
 		// es. 7: creazione stringa contenente comando SQL
 		String stringa7 = "SELECT Nome_editore, COUNT(Codice_libro) AS NumLibri, AVG(Prezzo_libro) AS PrezzoMedio "
-				+ "FROM Editori NATURAL JOIN Libri NATURAL JOIN LibriAutori "
+				+ "FROM Editori NATURAL JOIN Libri "
 				+ "GROUP BY Codice_editore";
 
 		try {
